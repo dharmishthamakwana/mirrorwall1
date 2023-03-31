@@ -11,17 +11,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeProvider? T, F;
+  HomeProvider? homeProviderTrue;
+  HomeProvider? homeProviderFalse;
 
   @override
   Widget build(BuildContext context) {
-    T = Provider.of<HomeProvider>(context, listen: false);
-    F = Provider.of<HomeProvider>(context, listen: true);
+    homeProviderFalse = Provider.of<HomeProvider>(context, listen: false);
+    homeProviderTrue = Provider.of<HomeProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.blueGrey.shade200,
+        backgroundColor: Colors.blueGrey.shade900,
         appBar: AppBar(
-          backgroundColor: Colors.blueGrey.shade400,
+          backgroundColor: Colors.blueGrey.shade600,
           title: Text(
             "all Educational",
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -30,32 +31,50 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: GridView.builder(
-            itemCount: F!.Logos.length,
+            itemCount: homeProviderFalse!.Logos.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, mainAxisExtent: 220),
+              crossAxisCount: 2,
+              mainAxisExtent: 250,
+            ),
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, 'open');
-                  F!.loadurl(index);
+                  homeProviderFalse!.loadurl(index);
                 },
                 child: Container(
+                  // height: 200,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                      color: Colors.blueGrey.shade100,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   margin: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Center(
-                        child: Image.asset(
-                          "${F!.Logos[index]}",
-                          fit: BoxFit.cover,
+                      Container(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 14),
+                            child: Image.asset(
+
+                              "${homeProviderFalse!.Logos[index]}",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        "${F!.names[index]}",
-                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.blueGrey.shade500,
+                            borderRadius: BorderRadius.circular(10)),
+                        width: double.infinity,
+                        child: Center(
+                          child: Text(
+                            "${homeProviderFalse!.name[index]}",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
                       ),
                     ],
                   ),

@@ -11,15 +11,16 @@ class WebScreen extends StatefulWidget {
 }
 
 class _WebScreenState extends State<WebScreen> {
-  HomeProvider? T, F;
+  HomeProvider? homeProviderTrue;
+  HomeProvider? homeProviderFalse;
 
   @override
   Widget build(BuildContext context) {
-    T = Provider.of<HomeProvider>(context, listen: false);
-    F = Provider.of<HomeProvider>(context, listen: true);
+    homeProviderFalse = Provider.of<HomeProvider>(context, listen: false);
+    homeProviderTrue = Provider.of<HomeProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
-        body: WebViewWidget(controller: F!.webViewController!),
+        body: WebViewWidget(controller: homeProviderFalse!.webViewController!),
       ),
     );
   }
